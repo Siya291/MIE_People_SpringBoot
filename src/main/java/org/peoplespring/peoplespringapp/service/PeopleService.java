@@ -10,7 +10,7 @@ public interface PeopleService {
 
     PeopleResponse create(PeopleRequest request);
 
-    List<PeopleEntity> findAll();
+    List<PeopleResponse> findAll();
 
     PeopleResponse findById(Long peopleId);
 
