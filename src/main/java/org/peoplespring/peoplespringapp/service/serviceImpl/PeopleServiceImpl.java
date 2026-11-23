@@ -3,6 +3,7 @@ package org.peoplespring.peoplespringapp.service.serviceImpl;
 import org.peoplespring.peoplespringapp.dto.request.PeopleRequest;
 import org.peoplespring.peoplespringapp.dto.response.PeopleResponse;
 import org.peoplespring.peoplespringapp.entity.PeopleEntity;
+import org.peoplespring.peoplespringapp.exceptions.DuplicateResourceException;
 import org.peoplespring.peoplespringapp.exceptions.ResourceNotFoundException;
 import org.peoplespring.peoplespringapp.repository.PeopleRepository;
 import org.peoplespring.peoplespringapp.service.PeopleService;
@@ -22,6 +23,11 @@ public class PeopleServiceImpl implements PeopleService {
     @Override
     @Transactional
     public PeopleResponse create(PeopleRequest request) {
+
+        if (peopleRepository.existsByEmail(request.email())) {
+            throw new DuplicateResourceException("A Person with this email already exists");
+        }
+
         PeopleEntity people = new PeopleEntity();
         people.setName(request.name());
         people.setEmail(request.email());

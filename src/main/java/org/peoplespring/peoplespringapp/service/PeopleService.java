@@ -2,7 +2,6 @@ package org.peoplespring.peoplespringapp.service;
 
 import org.peoplespring.peoplespringapp.dto.request.PeopleRequest;
 import org.peoplespring.peoplespringapp.dto.response.PeopleResponse;
-import org.peoplespring.peoplespringapp.entity.PeopleEntity;
 
 import java.util.List;
 
