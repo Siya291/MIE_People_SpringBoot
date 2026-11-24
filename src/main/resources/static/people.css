@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #f1f5f9;
+    padding: 3rem 1rem;
+    color: #334155;
+}
+
+.card {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.header h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-top: 0.25rem;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary {
+    background-color: #f1f5f9;
+    color: #334155;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-primary {
+    background-color: #134e4a;
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #0f766e;
+}
+
+.error-msg {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead tr {
+    background-color: #134e4a;
+    color: #ffffff;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+th, td {
+    padding: 0.875rem 1rem;
+}
+
+tbody tr {
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.875rem;
+    transition: background-color 0.15s;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+tbody tr:hover {
+    background-color: #f0fdfa;
+}
+
+.col-num {
+    width: 4rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.col-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.col-email {
+    color: #475569;
+}
+
+.empty-cell {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+}

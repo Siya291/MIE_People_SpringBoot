@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registered Users</title>
+    <link rel="stylesheet" href="people.css">
+</head>
+<body>
+<div class="card">
+    <div class="header">
+        <div>
+            <h2>Registered Users</h2>
+            <p id="userCount" class="subtitle">Loading records...</p>
+        </div>
+
+        <div class="actions">
+            <button id="refreshBtn" type="button" class="btn btn-secondary">
+                Refresh
+            </button>
+            <a href="index.html" class="btn btn-primary">
+                + Register New User
+            </a>
+        </div>
+    </div>
+
+    <p id="statusMessage" class="error-msg"></p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th class="col-num">#</th>
+                <th>Full Name</th>
+                <th>Email Address</th>
+            </tr>
+            </thead>
+            <tbody id="usersTableBody">
+            <tr>
+                <td colspan="3" class="empty-cell">Loading users...</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const tableBody = document.getElementById("usersTableBody");
+    const userCount = document.getElementById("userCount");
+    const statusMessage = document.getElementById("statusMessage");
+    const refreshBtn = document.getElementById("refreshBtn");
+
+    async function getAllUsers() {
+        statusMessage.style.display = "none";
+        tableBody.innerHTML = `<tr><td colspan="3" class="empty-cell">Loading users...</td></tr>`;
+
+        try {
+            const response = await fetch("api/v1/people");
+            const responseText = await response.text();
+
+            if (!response.ok) {
+                throw new Error(`Server error ${response.status}: ${responseText}`);
+            }
+
+            const users = JSON.parse(responseText);
+            renderTable(users);
+        } catch (error) {
+            console.error("Error fetching users:", error);
+            userCount.textContent = "Failed to load records";
+            statusMessage.textContent = error.message;
+            statusMessage.style.display = "block";
+            tableBody.innerHTML = `<tr><td colspan="3" class="empty-cell" style="color:#dc2626;">Unable to load user data.</td></tr>`;
+        }
+    }
+
+    function renderTable(users) {
+        tableBody.innerHTML = "";
+
+        if (!Array.isArray(users) || users.length === 0) {
+            userCount.textContent = "0 users found";
+            tableBody.innerHTML = `<tr><td colspan="3" class="empty-cell">No registered users yet.</td></tr>`;
+            return;
+        }
+
+        userCount.textContent = `Showing ${users.length} registered user${users.length === 1 ? "" : "s"}`;
+
+        users.forEach((user, index) => {
+            const row = document.createElement("tr");
+
+            const indexCell = document.createElement("td");
+            indexCell.className = "col-num";
+            indexCell.textContent = index + 1;
+
+            const nameCell = document.createElement("td");
+            nameCell.className = "col-name";
+            nameCell.textContent = user.name ?? "";
+
+            const emailCell = document.createElement("td");
+            emailCell.className = "col-email";
+            emailCell.textContent = user.email ?? "";
+
+            row.append(indexCell, nameCell, emailCell);
+            tableBody.appendChild(row);
+        });
+    }
+
+    refreshBtn.addEventListener("click", getAllUsers);
+    document.addEventListener("DOMContentLoaded", getAllUsers);
+</script>
+</body>
+</html>
